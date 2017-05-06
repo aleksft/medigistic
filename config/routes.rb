@@ -1,4 +1,6 @@
 Medigistic::Application.routes.draw do
+  resources :medicines
+
   devise_for :users
   root 'home#index'
   get "home/index"
