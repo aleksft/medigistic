@@ -36,6 +36,18 @@ class MedicinesController < ApplicationController
     respond_with(@medicine)
   end
 
+  def search
+    if params[:medicine]
+      @medicine = Medicine.where("user_id = ? AND name LIKE ?", current_user.id, "%#{params[:medicine]}%")
+    end
+
+    if @medicine
+      render partial: 'lookup'
+    else
+      render status: :not_found, nothing: true
+    end
+  end
+
   private
     def set_medicine
       @medicine = Medicine.find(params[:id])

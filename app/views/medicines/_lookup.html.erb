@@ -1,0 +1,34 @@
+<div id="medicine-lookup">
+
+  <h3>Search for Medicines</h3>
+
+  <%= form_tag search_medicines_path, remote: true, method: :get, id: 'medicine-lookup-form' do %>
+    <div class="form-group row no-padding text-center col-md-12">
+      <div class="col-md-10">
+        <%= text_field_tag :medicine,
+            params[:medicine],
+            placeholder: 'Medicine name',
+            autofocus: true,
+            class: 'form-control search-box input-lg' %>
+      </div>
+      <div class="col-md-2">
+        <%= button_tag(type: :submit, class: 'btn btn-lg btn-success') do %>
+        <i class="fa fa-search"></i>Look up a medicine
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <%= render 'common/spinner' %>
+
+  <% if @medicine %>
+    <div id="medicine-lookup-results" class="well results-block">
+      <strong>Name:</strong> <%= @medicine.name %>
+      <strong>Expiration date:</strong> <%= @medicine.expiration %>
+      <strong>Description:</strong> <%= @medicine.description %>
+    </div>
+  <% end %>
+
+  <div id="medicine-lookup-errors"></div>
+
+</div>
